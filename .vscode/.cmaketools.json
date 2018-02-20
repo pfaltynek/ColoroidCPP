@@ -28,16 +28,18 @@
                 "buildDirectory": "D:/Temp/ColoroidCPP/build",
                 "fileGroups": [
                   {
-                    "compileFlags": "-g  ",
+                    "compileFlags": " -Wall -std=gnu++0x -g  ",
                     "isGenerated": false,
                     "language": "CXX",
                     "sources": [
-                      "src/main.cpp"
+                      "src/main.cpp",
+                      "src/console_logo.cpp",
+                      "src/term_info_WIN.cpp"
                     ]
                   }
                 ],
                 "fullName": "coloroid.exe",
-                "linkLanguageFlags": "-g",
+                "linkLanguageFlags": "-Wall -std=gnu++0x -g",
                 "linkLibraries": "-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32",
                 "linkerLanguage": "CXX",
                 "name": "coloroid",
@@ -49,7 +51,7 @@
         ]
       }
     ],
-    "cookie": "0.9011801731244207",
+    "cookie": "0.9385667114067897",
     "inReplyTo": "codemodel",
     "type": "reply"
   }
