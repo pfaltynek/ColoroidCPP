@@ -46,12 +46,27 @@ const static std::string _compressed_logo = "|79.|2.7W13.3W33.3W7.3W.|2.W5BW13.W
 											"W1.3W1.7W1.3W7.7W1.3W1.9W.|79.|";
 
 void ConsoleLogo::print_uncompressed() {
+	unsigned int termw, termh;
+	std::string colors(".WBRGCYD");
+
+	terminal::GetTerminalSize(termw, termh);
+
+	if (termw < this->_logo_width) {
+		std::cout << "Console width at least " << this->_logo_width << " is requirement." << std::endl;
+		throw "Invalid console width";
+	}
+
 	for (auto it = _logo.begin(); it != _logo.end(); it++) {
-		std::cout << *it << std::endl;
+		for (unsigned int j = 0; j < (*it).size(); ++j) {
+			terminal::SetTerminalBackColor((*it)[j]);
+			std::cout << " ";
+		}
+		if (termw > this->_logo_width) {
+			std::cout << std::endl;
+		}
 	}
 }
 
-/*
 void ConsoleLogo::compress() {
 	std::cout << std::endl;
 
@@ -88,10 +103,10 @@ void ConsoleLogo::compress() {
 		}
 		std::cout << std::endl;
 	}
-}*/
+}
 
 void ConsoleLogo::decompress() {
-	int cnt, len;
+	int cnt;
 	char c;
 	std::string number, line;
 	unsigned int idx = 0;
@@ -99,47 +114,51 @@ void ConsoleLogo::decompress() {
 	number = "0";
 	line.clear();
 
-		while (idx < _compressed_logo.size()) {
-			c = _compressed_logo[idx];
-			switch (_compressed_logo[idx]) {
-				case '0':
-				case '1':
-				case '2':
-				case '3':
-				case '4':
-				case '5':
-				case '6':
-				case '7':
-				case '8':
-				case '9':
-					number += c;
-					break;
-				case '.':
-				case 'B':
-				case 'W':
-				case 'R':
-				case 'G':
-				case 'C':
-				case 'Y':
-				case 'D':
-					cnt = std::stoi(number);
-					number = "0";
-					line.append(std::string(cnt + 1, c));
-					//for (int i = 0; i <= cnt; i++) {
-					//	line += c;
-					//}
-					break;
-				case '|':
-					len = line.size();
-					_logo.push_back(line);
-					line.clear();
-					break;
-			}
-			idx++;
+	while (idx < _compressed_logo.size()) {
+		c = _compressed_logo[idx];
+		switch (_compressed_logo[idx]) {
+			case '0':
+			case '1':
+			case '2':
+			case '3':
+			case '4':
+			case '5':
+			case '6':
+			case '7':
+			case '8':
+			case '9':
+				number += c;
+				break;
+			case '.':
+			case 'B':
+			case 'W':
+			case 'R':
+			case 'G':
+			case 'C':
+			case 'Y':
+			case 'D':
+				cnt = std::stoi(number);
+				number = "0";
+				line.append(std::string(cnt + 1, c));
+				break;
+			case '|':
+				_logo.push_back(line);
+				line.clear();
+				break;
 		}
+		idx++;
+	}
 }
 
 ConsoleLogo::ConsoleLogo() {
+	// c.compress();
 	_logo.clear();
 	decompress();
+	for (auto it = _logo.begin(); it != _logo.end(); it++) {
+		if (!_logo_width) {
+			_logo_width = (*it).size();
+		} else if (_logo_width != (*it).size()) {
+			throw "Invalid logo";
+		}
+	}
 }
