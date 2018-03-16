@@ -1,34 +1,33 @@
 #include "console_logo.h"
 #include "term_info.h"
 
-// const char* ConsoleLogo::_logo[] = {
 /*
-std::vector<std::string> ConsoleLogo::_logo{// . = backround
-											// W = White
-											// B = Blue
-											// R = Red
-											// G = Green
-											// C = Cyan
-											// Y = Yellow
-											// D = Dark Gray
-											"................................................................................",
-											"...WWWWWWWW..............WWWW..................................WWWW........WWWW.",
-											"...WBBBBBBW..............WGGW..................................WYYW........WDDW.",
-											".WWWBBBBBBWWW............WGGW..................................WYYW........WDDW.",
-											".WBBWWWWWWBBW............WGGW..................................WWWW........WDDW.",
-											".WBBW....WBBW..WWWWWWWW..WGGW..WWWWWWWW..WWWWWWWWWW..WWWWWWWW..WWWW..WWWWWWWDDW.",
-											".WBBW....WWWW..WRRRRRRW..WGGW..WRRRRRRW..WCCWWCCCCW..WRRRRRRW..WYYW..WDDDDDDDDW.",
-											".WBBW........WWWRRRRRRWWWWGGWWWWRRRRRRWWWWCCWWCCCCWWWWRRRRRRWWWWYYWWWWDDDDDDDDW.",
-											".WBBW........WRRWWWWWWRRWWGGWWRRWWWWWWRRWWCCCCWWWWWWRRWWWWWWRRWWYYWWDDWWWWWWDDW.",
-											".WBBW........WRRW....WRRWWGGWWRRW....WRRWWCCCCW....WRRW....WRRWWYYWWDDW....WDDW.",
-											".WBBW........WRRW....WRRWWGGWWRRW....WRRWWCCWWW....WRRW....WRRWWYYWWDDW....WDDW.",
-											".WBBW....WWWWWRRW....WRRWWGGWWRRW....WRRWWCCW......WRRW....WRRWWYYWWDDW....WDDW.",
-											".WBBW....WBBWWRRW....WRRWWGGWWRRW....WRRWWCCW......WRRW....WRRWWYYWWDDW....WDDW.",
-											".WBBWWWWWWBBWWRRWWWWWWRRWWGGWWRRWWWWWWRRWWCCW......WRRWWWWWWRRWWYYWWDDWWWWWWDDW.",
-											".WWWBBBBBBWWWWWWRRRRRRWWWWGGWWWWRRRRRRWWWWCCW......WWWRRRRRRWWWWYYWWWWDDDDDDDDW.",
-											"...WBBBBBBW....WRRRRRRW..WGGW..WRRRRRRW..WCCW........WRRRRRRW..WYYW..WDDDDDDDDW.",
-											"...WWWWWWWW....WWWWWWWW..WWWW..WWWWWWWW..WWWW........WWWWWWWW..WWWW..WWWWWWWWWW.",
-											"................................................................................"};
+. = backround
+W = White
+B = Blue
+R = Red
+G = Green
+C = Cyan
+Y = Yellow
+D = Dark Gray
+"................................................................................",
+"...WWWWWWWW..............WWWW..................................WWWW........WWWW.",
+"...WBBBBBBW..............WGGW..................................WYYW........WDDW.",
+".WWWBBBBBBWWW............WGGW..................................WYYW........WDDW.",
+".WBBWWWWWWBBW............WGGW..................................WWWW........WDDW.",
+".WBBW....WBBW..WWWWWWWW..WGGW..WWWWWWWW..WWWWWWWWWW..WWWWWWWW..WWWW..WWWWWWWDDW.",
+".WBBW....WWWW..WRRRRRRW..WGGW..WRRRRRRW..WCCWWCCCCW..WRRRRRRW..WYYW..WDDDDDDDDW.",
+".WBBW........WWWRRRRRRWWWWGGWWWWRRRRRRWWWWCCWWCCCCWWWWRRRRRRWWWWYYWWWWDDDDDDDDW.",
+".WBBW........WRRWWWWWWRRWWGGWWRRWWWWWWRRWWCCCCWWWWWWRRWWWWWWRRWWYYWWDDWWWWWWDDW.",
+".WBBW........WRRW....WRRWWGGWWRRW....WRRWWCCCCW....WRRW....WRRWWYYWWDDW....WDDW.",
+".WBBW........WRRW....WRRWWGGWWRRW....WRRWWCCWWW....WRRW....WRRWWYYWWDDW....WDDW.",
+".WBBW....WWWWWRRW....WRRWWGGWWRRW....WRRWWCCW......WRRW....WRRWWYYWWDDW....WDDW.",
+".WBBW....WBBWWRRW....WRRWWGGWWRRW....WRRWWCCW......WRRW....WRRWWYYWWDDW....WDDW.",
+".WBBWWWWWWBBWWRRWWWWWWRRWWGGWWRRWWWWWWRRWWCCW......WRRWWWWWWRRWWYYWWDDWWWWWWDDW.",
+".WWWBBBBBBWWWWWWRRRRRRWWWWGGWWWWRRRRRRWWWWCCW......WWWRRRRRRWWWWYYWWWWDDDDDDDDW.",
+"...WBBBBBBW....WRRRRRRW..WGGW..WRRRRRRW..WCCW........WRRRRRRW..WYYW..WDDDDDDDDW.",
+"...WWWWWWWW....WWWWWWWW..WWWW..WWWWWWWW..WWWW........WWWWWWWW..WWWW..WWWWWWWWWW.",
+"................................................................................"
 */
 
 const static std::string _compressed_logo = "|79.|2.7W13.3W33.3W7.3W.|2.W5BW13.W1GW33.W1YW7.W1DW.|.2W5B2W"
@@ -56,15 +55,22 @@ void ConsoleLogo::print_uncompressed() {
 		throw "Invalid console width";
 	}
 
+	int orig_color = terminal::GetTerminalColor();
+
 	for (auto it = _logo.begin(); it != _logo.end(); it++) {
 		for (unsigned int j = 0; j < (*it).size(); ++j) {
 			terminal::SetTerminalBackColor((*it)[j]);
-			std::cout << " ";
+			//std::cout << " ";
+			//std::cout << (char)219; //█
+			std::cout << (char)220; //▄
+			//std::cout << (char)223; //▀
 		}
 		if (termw > this->_logo_width) {
 			std::cout << std::endl;
 		}
 	}
+
+	terminal::SetTerminalColor(orig_color);
 }
 
 void ConsoleLogo::compress() {

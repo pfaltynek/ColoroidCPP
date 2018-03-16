@@ -2,8 +2,8 @@
 
 int main() {
 
-	ConsoleLogo c;
+	ConsoleLogo cl;
 
-	c.print_uncompressed();
+	cl.print_uncompressed();
 	return 0;
 }
