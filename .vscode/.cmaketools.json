@@ -34,6 +34,7 @@
                     "sources": [
                       "src/main.cpp",
                       "src/console_logo.cpp",
+                      "src/game_par.cpp",
                       "src/term_info_WIN.cpp"
                     ]
                   }
@@ -51,7 +52,7 @@
         ]
       }
     ],
-    "cookie": "0.5858110958134903",
+    "cookie": "0.5774976752010674",
     "inReplyTo": "codemodel",
     "type": "reply"
   }

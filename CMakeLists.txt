@@ -10,4 +10,4 @@ IF (UNIX)
 	SET(PLATFORM_DEPENDENT_SRC src/term_info_LINUX.cpp)
 ENDIF(UNIX)
 
-ADD_EXECUTABLE(coloroid src/main.cpp src/console_logo.cpp ${PLATFORM_DEPENDENT_SRC})
+ADD_EXECUTABLE(coloroid src/main.cpp src/console_logo.cpp src/game_par.cpp ${PLATFORM_DEPENDENT_SRC})
