@@ -9,13 +9,12 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${command:cmake.launchTargetPath}",
-			/*"linux": {
+			"linux": {
 				"miDebuggerPath": "gdb"
 			},
 			"windows": {
 				"miDebuggerPath": "gdb32.exe"
-			},*/
-			"miDebuggerPath": "gdb32.exe",
+			},
 			"args": [],
 			"stopAtEntry": true,
 			"cwd": "${workspaceFolder}",
