@@ -60,9 +60,9 @@ void ConsoleLogo::print_uncompressed() {
 	for (auto it = _logo.begin(); it != _logo.end(); it++) {
 		for (unsigned int j = 0; j < (*it).size(); ++j) {
 			terminal::SetTerminalBackColor((*it)[j]);
-			//std::cout << " ";
+			std::cout << " ";
 			//std::cout << (char)219; //█
-			std::cout << (char)220; //▄
+			//std::cout << (char)220; //▄
 			//std::cout << (char)223; //▀
 		}
 		if (termw > this->_logo_width) {
