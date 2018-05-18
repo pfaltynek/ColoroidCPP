@@ -8,7 +8,7 @@
 			"name": "Launch CMake-built program",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "${command:cmake.launchTargetProgramPath}",
+			"program": "${command:cmake.launchTargetPath}",
 			/*"linux": {
 				"miDebuggerPath": "gdb"
 			},
