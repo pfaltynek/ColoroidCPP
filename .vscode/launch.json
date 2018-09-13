@@ -8,14 +8,13 @@
 			"name": "Launch CMake-built program",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "${command:cmake.launchTargetProgramPath}",
-			/*"linux": {
+			"program": "${command:cmake.launchTargetPath}",
+			"linux": {
 				"miDebuggerPath": "gdb"
 			},
 			"windows": {
 				"miDebuggerPath": "gdb32.exe"
-			},*/
-			"miDebuggerPath": "gdb32.exe",
+			},
 			"args": [],
 			"stopAtEntry": true,
 			"cwd": "${workspaceFolder}",
